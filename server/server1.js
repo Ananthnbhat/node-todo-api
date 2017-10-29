@@ -18,7 +18,15 @@ app.post('/todos', (req, res) => {
     todo.save().then((doc) => {
         res.send(doc);
     }, (e) => {
-res.status(400).send(e);
+        res.status(400).send(e);
+    });
+});
+
+app.get('/todos', (req, res) => {
+    Todo.find().then((todos) => {
+        res.send({ todos });//todos is actually an array,but we are converting it into an object so that various other properties can be added or modified later on
+    }, (e) => {
+        res.status(400).send(e);
     });
 });
 
